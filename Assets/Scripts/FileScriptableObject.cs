@@ -5,5 +5,4 @@ public class FileScriptableObject : ScriptableObject
 {
     public string fileName;
     public Sprite fileIcon;
-    public string ipAddress;
 }
