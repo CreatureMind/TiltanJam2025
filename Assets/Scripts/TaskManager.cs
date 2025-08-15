@@ -3,9 +3,22 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 
-public class TaskManager : Singleton<TaskManager>
+public class TaskManager : MonoBehaviour
 {
+    private static TaskManager instance;
+    protected virtual void Awake()
+    {
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+    }
+
+    public static TaskManager Get() => instance;
+
     [SerializeField] private List<FileHandler> allFiles = new();
     [SerializeField] private float maxMemoryCapacity;
     [SerializeField, ReadOnly] private float memoryCapacity;
@@ -15,6 +28,12 @@ public class TaskManager : Singleton<TaskManager>
     [SerializeField] GameObject wirePrefab;
     [SerializeField] private WeightedList<InternetWireScriptableObject> possibleWires;
     [SerializeField] private FileGenerator generator;
+
+    [SerializeField] private GameObject gameOverCanvas;
+
+    private bool isDead;
+
+    public event UnityAction OnGameOver;
 
     public int WireCompleteCount { get; private set; }
 
@@ -44,8 +63,12 @@ public class TaskManager : Singleton<TaskManager>
     {
         memoryCapacity = allFiles.Sum(e => e.file.size);
 
-        if (maxMemoryCapacity <= memoryCapacity)
-            Debug.Log("DEATH!");
+        if (maxMemoryCapacity <= memoryCapacity && !isDead)
+        {
+            isDead = true;
+            OnGameOver?.Invoke();
+            gameOverCanvas.SetActive(true);
+        }
     }
 
     void OnFilePooled(FileHandler file)
@@ -67,5 +90,11 @@ public class TaskManager : Singleton<TaskManager>
     void OnWireComplete(InternetWire wire)
     {
         WireCompleteCount++;
+    }
+
+    public void ResetGame()
+    {
+        instance = null;
+        SceneManager.LoadScene(1);
     }
 }

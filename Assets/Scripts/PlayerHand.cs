@@ -36,11 +36,14 @@ public class PlayerHand : MonoBehaviour, IHitReciever
 
     private FileHandler file = null;
 
+    private bool canDrag = true;
+
     private void Start()
     {
         originalLRSortingOrder = lr.sortingOrder;
         originalTipSortingOrder = handTipSpr.sortingOrder;
         tipNormalSpr = handTipSpr.sprite;
+        TaskManager.Get().OnGameOver += () => canDrag = false;
     }
 
     void MouseUp()
@@ -122,10 +125,17 @@ public class PlayerHand : MonoBehaviour, IHitReciever
     // Update is called once per frame
     void Update()
     {
-        MouseClickDetect();
+        if (!canDrag)
+        {
+            GoToOrigin();
+        }
+        else
+        {
+            if (!isDragging && this.file == null) GoToOrigin();
+            else if (this.file == null) FollowMouse();
+        }
 
-        if (!isDragging && this.file == null) GoToOrigin();
-        else if (this.file == null) FollowMouse();
+        MouseClickDetect();
 
         if (this.file != null || isDragging)
         {

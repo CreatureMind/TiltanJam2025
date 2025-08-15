@@ -5,7 +5,7 @@ public class TrashBin : MonoBehaviour
 {
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.TryGetComponent(out FileHandler file))
+        if (collision.TryGetComponent(out FileHandler file) && file.isCought)
         {
             DeleteFile(file);
         }

@@ -17,11 +17,15 @@ public class FileGenerator : MonoBehaviour
     public List<FileHandler> GeneratedFiles { get; private set; } = new();
     
     public event UnityAction<FileHandler> OnNewFilePooled;
+
+    Coroutine spawnPool;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        StartCoroutine(GenerateFileSlowly());
+        spawnPool = StartCoroutine(GenerateFileSlowly());
+
+        TaskManager.Get().OnGameOver += () => StopCoroutine(spawnPool);
     }
 
     private void OnTriggerExit2D(Collider2D other)
