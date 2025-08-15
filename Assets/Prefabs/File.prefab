@@ -59,6 +59,12 @@ MonoBehaviour:
       weight: 100
     - element: {fileID: 11400000, guid: ac2c68684cbfa49c9ac3a451d33927aa, type: 2}
       weight: 100
+  popDuration: 0.25
+  popOvershoot: 10
+  minImpulse: 10
+  maxImpulse: 15
+  minTorque: 60
+  maxTorque: 180
 --- !u!50 &7929812642955401965
 Rigidbody2D:
   serializedVersion: 5

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,6 +17,17 @@ public class FileHandler : MonoBehaviour
     public Vector2 moveDirection { get; set; }
     private bool isEntered = false;
     private Vector2 lastPosition;
+    
+    [Header("Pop Tween")]
+    public float popDuration = 0.25f;
+    public float popOvershoot = 1.2f;
+
+    [Header("Random Physics")]
+    public float minImpulse = 6f;
+    public float maxImpulse = 12f;
+    public float minTorque = 60f;
+    public float maxTorque = 180f;
+
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -37,11 +49,23 @@ public class FileHandler : MonoBehaviour
     
     public void OnEntered()
     {
+        if (isEntered) return;
         isEntered = true;
+
         rb.bodyType = RigidbodyType2D.Dynamic;
-        transform.localScale = Vector3.one;
+
+        // Pop back to Vector.one with DOTween
+        transform.DOKill(); // ensure no conflicting tweens
+        transform.DOScale(Vector3.one, popDuration)
+            .SetEase(Ease.OutBack, popOvershoot);
+
+        // Apply random impulse force
+        var impulse = Random.Range(minImpulse, maxImpulse);
         var forceDir = ((Vector2)transform.position - lastPosition).normalized;
-        rb.AddForce(forceDir * 10, ForceMode2D.Impulse);
-        rb.AddTorque(100);
+        rb.AddForce(forceDir * impulse, ForceMode2D.Impulse);
+
+        // Apply random spin (torque), random direction
+        var torque = Random.Range(minTorque, maxTorque) * (Random.value < 0.5f ? -1f : 1f);
+        rb.AddTorque(torque);
     }
 }
