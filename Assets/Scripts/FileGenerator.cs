@@ -34,5 +34,6 @@ public class FileGenerator : MonoBehaviour
         file.transform.position = spawnPoint.position;
         file.transform.rotation = spawnPoint.rotation;
         file.moveDirection = (transform.position - spawnPoint.position).normalized;
+        file.SetupForRandomFile();
     }
 }

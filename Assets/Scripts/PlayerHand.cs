@@ -83,13 +83,7 @@ public class PlayerHand : MonoBehaviour, IHitReciever
 
         tip.transform.position = endPos;
 
-        isDragging = false;
-        file.rb.bodyType = RigidbodyType2D.Dynamic;
-        file.rb.linearVelocity = Vector2.zero;
-        file.rb.angularVelocity = 0;
-        file.OnReleased();
-        file = null;
-        targetPos = null;
+        ForceUngrip();
     }
 
     void MouseClickDetect()
@@ -191,8 +185,21 @@ public class PlayerHand : MonoBehaviour, IHitReciever
             file.rb.bodyType = RigidbodyType2D.Kinematic;
             file.rb.linearVelocity = Vector2.zero;
             file.rb.angularVelocity = 0;
-            file.OnCought();
+            file.OnCought(this);
             //on picked
         }
+    }
+
+    public void ForceUngrip()
+    {
+        if (file == null) return;
+
+        isDragging = false;
+        file.rb.bodyType = RigidbodyType2D.Dynamic;
+        file.rb.linearVelocity = Vector2.zero;
+        file.rb.angularVelocity = 0;
+        file.OnReleased();
+        file = null;
+        targetPos = null;
     }
 }

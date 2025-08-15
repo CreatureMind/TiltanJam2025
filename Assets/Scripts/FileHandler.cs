@@ -21,6 +21,7 @@ public class FileHandler : MonoBehaviour
     private Vector2 lastPosition;
 
     public bool isCought;
+    public PlayerHand coughtHand;
     
     [Header("Pop Tween")]
     public float popDuration = 0.25f;
@@ -36,19 +37,27 @@ public class FileHandler : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        file = files.ChooseRandom() as FileScriptableObject;
-        fileName.text = file.fileName;
-        fileIcon.sprite = file.fileIcon;
-        rb.bodyType = RigidbodyType2D.Kinematic;
-        transform.localScale = Vector3.one * 0.5f;
-        
         if (bottomPoint != null)
         {
             // Rigidbody2D.centerOfMass is in local space:
             rb.centerOfMass = bottomPoint.localPosition;
         }
     }
-    
+
+    public void SetupForFileSettings(FileScriptableObject settings)
+    {
+        file = settings;
+        fileName.text = file.fileName;
+        fileIcon.sprite = file.fileIcon;
+        rb.bodyType = RigidbodyType2D.Kinematic;
+        transform.localScale = Vector3.one * 0.5f;
+    }
+
+    public void SetupForRandomFile()
+    {
+        SetupForFileSettings(files.ChooseRandom() as FileScriptableObject);
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -57,7 +66,7 @@ public class FileHandler : MonoBehaviour
             transform.position += (Vector3)moveDirection * (Time.deltaTime * pipeSpeed);
     }
     
-    public void OnEntered()
+    public void OnEntered(bool applyForce = true)
     {
         if (isEntered) return;
         isEntered = true;
@@ -69,23 +78,28 @@ public class FileHandler : MonoBehaviour
         transform.DOScale(Vector3.one, popDuration)
             .SetEase(Ease.OutBack, popOvershoot);
 
-        // Apply random impulse force
-        var impulse = Random.Range(minImpulse, maxImpulse);
-        var forceDir = ((Vector2)transform.position - lastPosition).normalized;
-        rb.AddForce(forceDir * impulse, ForceMode2D.Impulse);
+        if (applyForce)
+        {
+            // Apply random impulse force
+            var impulse = Random.Range(minImpulse, maxImpulse);
+            var forceDir = ((Vector2)transform.position - lastPosition).normalized;
+            rb.AddForce(forceDir * impulse, ForceMode2D.Impulse);
 
-        // Apply random spin (torque), random direction
-        var torque = Random.Range(minTorque, maxTorque) * (Random.value < 0.5f ? -1f : 1f);
-        rb.AddTorque(torque);
+            // Apply random spin (torque), random direction
+            var torque = Random.Range(minTorque, maxTorque) * (Random.value < 0.5f ? -1f : 1f);
+            rb.AddTorque(torque);
+        }
     }
 
-    public void OnCought()
+    public void OnCought(PlayerHand hand)
     {
+        coughtHand = hand;
         isCought = true;
     }
 
     public void OnReleased()
     {
+        coughtHand = null;
         isCought = false;
     }
 }

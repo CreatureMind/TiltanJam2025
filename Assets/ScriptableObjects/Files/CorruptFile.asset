@@ -10,15 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5222d3b449164989a67af2ecad4bef1, type: 3}
-  m_Name: old_photos_scan.zip
+  m_Name: CorruptFile
   m_EditorClassIdentifier: 
-  fileName: old_photos_scan.zip
-  fileIcon: {fileID: 3276473918741473981, guid: 10d0ef65b1dd94b40b710cdc3ff67175, type: 3}
+  fileName: NULL
+  fileIcon: {fileID: -5548791107479727098, guid: f527f1f932e554fa1b773c9a715f4d2b, type: 3}
   isImage: 0
   size: 1
   picture: {fileID: 0}
   isVirus: 1
-  isFolder: 1
+  isFolder: 0
   files: []
-  isLocked: 1
-  password: 1234
+  isLocked: 0
+  password: 
