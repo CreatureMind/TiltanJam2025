@@ -17,6 +17,8 @@ public class FileHandler : MonoBehaviour
     public Vector2 moveDirection { get; set; }
     public bool isEntered = false;
     private Vector2 lastPosition;
+
+    public bool isCought;
     
     [Header("Pop Tween")]
     public float popDuration = 0.25f;
@@ -67,5 +69,15 @@ public class FileHandler : MonoBehaviour
         // Apply random spin (torque), random direction
         var torque = Random.Range(minTorque, maxTorque) * (Random.value < 0.5f ? -1f : 1f);
         rb.AddTorque(torque);
+    }
+
+    public void OnCought()
+    {
+        isCought = true;
+    }
+
+    public void OnReleased()
+    {
+        isCought = false;
     }
 }

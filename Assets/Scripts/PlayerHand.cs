@@ -22,6 +22,8 @@ public class PlayerHand : MonoBehaviour, IHitReciever
     [SerializeField] private int zOrderSelectedAddition;
     [BoxGroup("Options")]
     [SerializeField] private Sprite tipHoldSpr;
+    [BoxGroup("Options")]
+    [SerializeField] private Vector2 originOffset;
 
     private Sprite tipNormalSpr;
 
@@ -85,6 +87,7 @@ public class PlayerHand : MonoBehaviour, IHitReciever
         file.rb.bodyType = RigidbodyType2D.Dynamic;
         file.rb.linearVelocity = Vector2.zero;
         file.rb.angularVelocity = 0;
+        file.OnReleased();
         file = null;
         targetPos = null;
     }
@@ -146,13 +149,15 @@ public class PlayerHand : MonoBehaviour, IHitReciever
         else
             handTipSpr.sprite = tipNormalSpr;
 
+        var realOrigin = origin.position + (Vector3)originOffset;
+
         lr.positionCount = 2;
         lr.SetPositions(new Vector3[]{
-            origin.position,
+            realOrigin,
             tip.position
         });
 
-        var directionVector = tip.position - origin.position;
+        var directionVector = tip.position - realOrigin;
 
         var textScale = lr.textureScale;
         textScale.y = directionVector.x > 0 ? -1 : 1;
@@ -180,12 +185,13 @@ public class PlayerHand : MonoBehaviour, IHitReciever
     {
         if (hitID == 0 && type == IHitReciever.HitType.Enter)
         {
-            if (!isDragging || this.file != null || !other.TryGetComponent(out FileHandler file) || !file.isEntered) return;
+            if (!isDragging || this.file != null || !other.TryGetComponent(out FileHandler file) || !file.isEntered || file.isCought) return;
 
             this.file = file;
             file.rb.bodyType = RigidbodyType2D.Kinematic;
             file.rb.linearVelocity = Vector2.zero;
             file.rb.angularVelocity = 0;
+            file.OnCought();
             //on picked
         }
     }
