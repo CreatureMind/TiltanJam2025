@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
@@ -37,6 +38,8 @@ public class FileHandler : MonoBehaviour
     public float maxImpulse = 12f;
     public float minTorque = 60f;
     public float maxTorque = 180f;
+
+    public event UnityAction<FileHandler> OnConsumed;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -96,6 +99,8 @@ public class FileHandler : MonoBehaviour
         if (isEntered) return;
         isEntered = true;
 
+        TaskManager.Get().AddFile(this);
+
         rb.bodyType = RigidbodyType2D.Dynamic;
 
         // Pop back to Vector.one with DOTween
@@ -126,5 +131,10 @@ public class FileHandler : MonoBehaviour
     {
         coughtHand = null;
         isCought = false;
+    }
+
+    private void OnDestroy()
+    {
+        OnConsumed?.Invoke(this);
     }
 }

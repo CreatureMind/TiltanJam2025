@@ -70,7 +70,7 @@ public class PlayerHand : MonoBehaviour, IHitReciever
     {
         if (!targetPos.HasValue || file == null) yield break;
 
-        float totalTime = 1 / file.file.size;
+        float totalTime = file.file.size;
         Vector3 startingPos = tip.transform.position;
         Vector3 endPos = targetPos.Value;
 

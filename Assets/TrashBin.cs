@@ -16,12 +16,13 @@ public class TrashBin : MonoBehaviour
         if (file.coughtHand != null)
             file.coughtHand.ForceUngrip();
 
-        file.isEntered = false;
         file.transform.DOKill();
         file.transform.DOScale(Vector3.zero, .5f)
             .SetEase(Ease.InBack, 1.2f);
         file.transform.DOMove(transform.position, .5f)
             .SetEase(Ease.InOutExpo, 2);
+
+        file.GetComponent<Collider2D>().enabled = false;
 
         Destroy(file.gameObject, .5f);
     }
