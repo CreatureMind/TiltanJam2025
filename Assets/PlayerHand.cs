@@ -9,21 +9,46 @@ using UnityEngine.Events;
 
 public class PlayerHand : MonoBehaviour, IHitReciever
 {
+    [BoxGroup("References")]
     [SerializeField] private LineRenderer lr;
+    [BoxGroup("References")]
     [SerializeField] private Transform origin;
+    [BoxGroup("References")]
     [SerializeField] private Transform tip;
+    [BoxGroup("References")]
+    [SerializeField] private SpriteRenderer handTipSpr;
+
+    [BoxGroup("Options")]
+    [SerializeField] private int zOrderSelectedAddition;
+    [BoxGroup("Options")]
+    [SerializeField] private Sprite tipHoldSpr;
+
+    private Sprite tipNormalSpr;
+
     private Vector3? targetPos = null;
+    private int originalLRSortingOrder;
+    private int originalTipSortingOrder;
 
     [SerializeField, ReadOnly]
     private bool isDragging = false;
 
     private FileHandler file = null;
 
+    private void Start()
+    {
+        originalLRSortingOrder = lr.sortingOrder;
+        originalTipSortingOrder = handTipSpr.sortingOrder;
+        tipNormalSpr = handTipSpr.sprite;
+    }
+
     void MouseUp()
     {
         if (file != null && !targetPos.HasValue)
         {
-            targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            var newTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            newTarget.z = 0;
+            newTarget = newTarget.Clamp(new Vector3(-9, -5, 0), new Vector3(9, 5, 0));
+            targetPos = newTarget;
             StartCoroutine(GoToTagetPos());
         }
 
@@ -104,6 +129,22 @@ public class PlayerHand : MonoBehaviour, IHitReciever
         if (!isDragging && this.file == null) GoToOrigin();
         else if (this.file == null) FollowMouse();
 
+        if (this.file != null || isDragging)
+        {
+            lr.sortingOrder = originalLRSortingOrder + zOrderSelectedAddition;
+            handTipSpr.sortingOrder = originalTipSortingOrder + zOrderSelectedAddition;
+        }
+        else
+        {
+            lr.sortingOrder = originalLRSortingOrder;
+            handTipSpr.sortingOrder = originalTipSortingOrder;
+        }
+
+        if (tipHoldSpr != null && file != null)
+            handTipSpr.sprite = tipHoldSpr;
+        else
+            handTipSpr.sprite = tipNormalSpr;
+
         lr.positionCount = 2;
         lr.SetPositions(new Vector3[]{
             origin.position,
@@ -142,6 +183,7 @@ public class PlayerHand : MonoBehaviour, IHitReciever
 
             this.file = file;
             file.rb.bodyType = RigidbodyType2D.Kinematic;
+            file.rb.linearVelocity = Vector2.zero;
             //on picked
         }
     }
