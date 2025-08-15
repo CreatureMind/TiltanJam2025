@@ -48,12 +48,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bcb036e16d6e446ab843d5fc1684c3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  file: {fileID: 11400000, guid: ac2c68684cbfa49c9ac3a451d33927aa, type: 2}
+  file: {fileID: 0}
   fileIcon: {fileID: 8607542016240078383}
   fileName: {fileID: 3143945364411219739}
   rb: {fileID: 7929812642955401965}
+  pipeSpeed: 3
   files:
-  - {fileID: 11400000, guid: ac2c68684cbfa49c9ac3a451d33927aa, type: 2}
+    values:
+    - element: {fileID: 11400000, guid: d238cd624f1e049c5ad39650b519d3ca, type: 2}
+      weight: 100
+    - element: {fileID: 11400000, guid: ac2c68684cbfa49c9ac3a451d33927aa, type: 2}
+      weight: 100
 --- !u!50 &7929812642955401965
 Rigidbody2D:
   serializedVersion: 5

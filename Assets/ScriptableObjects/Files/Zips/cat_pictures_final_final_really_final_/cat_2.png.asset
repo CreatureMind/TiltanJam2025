@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5222d3b449164989a67af2ecad4bef1, type: 3}
-  m_Name: old_photos_scan.zip
+  m_Name: cat_2.png
   m_EditorClassIdentifier: 
-  fileName: old_photos_scan.zip
-  fileIcon: {fileID: 3276473918741473981, guid: 10d0ef65b1dd94b40b710cdc3ff67175, type: 3}
-  isImage: 0
-  picture: {fileID: 0}
+  fileName: cat_2.png
+  fileIcon: {fileID: -3776347469803542281, guid: 986e020df352c4447a868ee7b1099389, type: 3}
+  isImage: 1
+  picture: {fileID: 8903766432266672828, guid: 9e4032c9bc0a346eab7b1acd2d05630f, type: 3}
   isVirus: 0
-  isFolder: 1
+  isFolder: 0
   files: []
-  isLocked: 1
-  password: 1234
+  isLocked: 0
+  password: 

@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -17,11 +18,21 @@ public class FileGenerator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+            GenerateFile();
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.TryGetComponent(out FileHandler file))
+            file.OnEntered();
     }
 
     private void GenerateFile()
     {
-        Instantiate(filePrefab, spawnPoint.position, spawnPoint.rotation);
+        var file = Instantiate(filePrefab);
+        file.transform.position = spawnPoint.position;
+        file.transform.rotation = spawnPoint.rotation;
+        file.moveDirection = (transform.position - spawnPoint.position).normalized;
     }
 }
