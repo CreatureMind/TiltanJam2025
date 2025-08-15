@@ -124,34 +124,12 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites:
-    - serializedVersion: 2
-      name: ArmFront_0
-      rect:
-        serializedVersion: 2
-        x: 21
-        y: 234
-        width: 1619
-        height: 308
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: dc516ee9d7b73f3c0800000000000000
-      internalID: -4326979037505907251
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
+    sprites: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: ff9df24d42866413a83782ce26e83e92
     internalID: 0
     vertices: []
     indices: 
