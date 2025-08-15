@@ -56,6 +56,7 @@ public class FileHandler : MonoBehaviour
     {
         file = settings;
         fileName.text = file.fileName;
+        fileName.gameObject.SetActive(false);
         fileIcon.sprite = file.fileIcon;
         rb.bodyType = RigidbodyType2D.Kinematic;
         transform.localScale = Vector3.one * pipeSize;
@@ -102,6 +103,8 @@ public class FileHandler : MonoBehaviour
         TaskManager.Get().AddFile(this);
 
         rb.bodyType = RigidbodyType2D.Dynamic;
+        
+        fileName.gameObject.SetActive(true);
 
         // Pop back to Vector.one with DOTween
         transform.DOKill(); // ensure no conflicting tweens
