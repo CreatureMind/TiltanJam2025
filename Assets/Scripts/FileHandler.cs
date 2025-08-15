@@ -1,8 +1,10 @@
+using System;
 using System.Collections.Generic;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Random = UnityEngine.Random;
 
 public class FileHandler : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class FileHandler : MonoBehaviour
     public float pipeSize;
     public Transform bottomPoint;
     public string IP;
+    public TooltipHandler tooltip;
+    public float tooltipOffset = 1f;
     
     public WeightedList<ScriptableObject> files;
     
@@ -67,6 +71,26 @@ public class FileHandler : MonoBehaviour
             transform.position += (Vector3)moveDirection * (Time.deltaTime * pipeSpeed);
     }
     
+    void LateUpdate()
+    {
+        if (tooltip)
+        {
+            tooltip.transform.position = transform.position + Vector3.up * tooltipOffset;
+            tooltip.transform.rotation = Quaternion.identity;
+        }
+    }
+
+
+    private void OnMouseEnter()
+    {
+        tooltip.ShowTooltip();
+    }
+
+    private void OnMouseExit()
+    {
+        tooltip.HideTooltip();
+    }
+
     public void OnEntered(bool applyForce = true)
     {
         if (isEntered) return;

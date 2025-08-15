@@ -892,6 +892,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filePrefab: {fileID: 5016628018956917613, guid: be6c285e665bd46e1b6763aabbea003e, type: 3}
   spawnPoint: {fileID: 1293257354}
+  maxFilesToGenerate: 10
+  filesGenerated: 0
+  timeToGenerate: 2
+  isGenerating: 0
 --- !u!4 &1960072113
 Transform:
   m_ObjectHideFlags: 0

@@ -10,16 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5222d3b449164989a67af2ecad4bef1, type: 3}
-  m_Name: pizza_dough_recipe.txt
+  m_Name: definitely_not_a_virus.exe
   m_EditorClassIdentifier: 
-  fileName: pizza_dough_recipe.txt
-  fileIcon: {fileID: 21300000, guid: 306c7c21cea7a451bae4a790d6179373, type: 3}
-  size: 0.5
-  isImage: 1
+  fileName: definitely_not_a_virus.exe
+  fileIcon: {fileID: 21300000, guid: 70eedf79665f34b5faa0df408309950e, type: 3}
+  size: 3
+  isImage: 0
   picture: {fileID: 0}
   isSound: 0
   sound: {fileID: 0}
-  isVirus: 0
+  isVirus: 1
   isFolder: 0
   files: []
   isLocked: 0
