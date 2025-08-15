@@ -69,7 +69,6 @@ public class FileGenerator : MonoBehaviour
     {
         while (true)
         {
-            //Debug.Log(timeToGenerate * Mathf.Pow(Mathf.Pow(0.5f, 1f / 10f), TaskManager.Get().WireCompleteCount));
             yield return new WaitForSeconds(timeToGenerate * Mathf.Pow(Mathf.Pow(0.5f, 1f / 10f), TaskManager.Get().WireCompleteCount));
             InstantiateFile();
         }
@@ -77,7 +76,6 @@ public class FileGenerator : MonoBehaviour
 
     IEnumerator AutoReleaseFromPool(FileHandler file)
     {
-        //Debug.Log(timeToGenerate * Mathf.Pow(Mathf.Pow(0.75f, 1f / 10f), TaskManager.Get().WireCompleteCount));
         yield return new WaitForSeconds(UnityEngine.Random.Range(1, timeToGenerate * Mathf.Pow(Mathf.Pow(0.75f, 1f / 10f), TaskManager.Get().WireCompleteCount)));
         SpawnFile(file);
     }

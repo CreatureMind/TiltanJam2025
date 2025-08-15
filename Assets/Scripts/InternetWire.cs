@@ -124,8 +124,6 @@ public class InternetWire : MonoBehaviour, IHitReciever
 
         if (requiredIPs.Count == 0 && !isCorrupted)
         {
-            OnWireComplete?.Invoke(this);
-
             WireLeave();
         }
     }
@@ -166,6 +164,8 @@ public class InternetWire : MonoBehaviour, IHitReciever
     {
         if (isLeaving) return;
         isLeaving = true;
+
+        OnWireComplete?.Invoke(this);
 
         transform.DOKill();
         transform.DOMove(transform.position + (Vector3.up * 4), 1)
