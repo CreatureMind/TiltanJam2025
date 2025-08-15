@@ -11,6 +11,7 @@ public class FileHandler : MonoBehaviour
     public TMP_Text fileName;
     public Rigidbody2D rb;
     public float pipeSpeed;
+    public Transform bottomPoint;
     
     public WeightedList<ScriptableObject> files;
     
@@ -29,8 +30,8 @@ public class FileHandler : MonoBehaviour
     public float maxImpulse = 12f;
     public float minTorque = 60f;
     public float maxTorque = 180f;
-
     
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -39,6 +40,12 @@ public class FileHandler : MonoBehaviour
         fileIcon.sprite = file.fileIcon;
         rb.bodyType = RigidbodyType2D.Kinematic;
         transform.localScale = Vector3.one * 0.5f;
+        
+        if (bottomPoint != null)
+        {
+            // Rigidbody2D.centerOfMass is in local space:
+            rb.centerOfMass = bottomPoint.localPosition;
+        }
     }
     
     // Update is called once per frame
