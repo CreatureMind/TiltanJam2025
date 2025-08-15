@@ -11,6 +11,7 @@ public class FileHandler : MonoBehaviour
     public TMP_Text fileName;
     public Rigidbody2D rb;
     public float pipeSpeed;
+    public float pipeSize;
     public Transform bottomPoint;
     public string IP;
     
@@ -50,7 +51,7 @@ public class FileHandler : MonoBehaviour
         fileName.text = file.fileName;
         fileIcon.sprite = file.fileIcon;
         rb.bodyType = RigidbodyType2D.Kinematic;
-        transform.localScale = Vector3.one * 0.5f;
+        transform.localScale = Vector3.one * pipeSize;
     }
 
     public void SetupForRandomFile()

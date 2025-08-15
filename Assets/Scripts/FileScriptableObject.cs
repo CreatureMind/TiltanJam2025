@@ -6,10 +6,13 @@ public class FileScriptableObject : ScriptableObject
 {
     public string fileName;
     public Sprite fileIcon;
-    public bool isImage;
     public float size = 1;
+    public bool isImage;
     [ShowIf("isImage")] 
     public Sprite picture;
+    public bool isSound;
+    [ShowIf("isSound")] 
+    public AudioClip sound;
     public bool isVirus;
     public bool isFolder;
     [ShowIf("isFolder")]

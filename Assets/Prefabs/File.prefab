@@ -54,6 +54,7 @@ MonoBehaviour:
   fileName: {fileID: 3143945364411219739}
   rb: {fileID: 7929812642955401965}
   pipeSpeed: 3
+  pipeSize: 0.5
   bottomPoint: {fileID: 2103946946724599689}
   IP: 
   files:
@@ -61,6 +62,14 @@ MonoBehaviour:
     - element: {fileID: 11400000, guid: d238cd624f1e049c5ad39650b519d3ca, type: 2}
       weight: 100
     - element: {fileID: 11400000, guid: ac2c68684cbfa49c9ac3a451d33927aa, type: 2}
+      weight: 100
+    - element: {fileID: 11400000, guid: 5058f1cb10452ed42974f695b6db7fd3, type: 2}
+      weight: 10
+    - element: {fileID: 11400000, guid: 28787d56c1a864dbd815aca6b35a9ad7, type: 2}
+      weight: 100
+    - element: {fileID: 11400000, guid: 69507536e907d4c878300fad98ee634a, type: 2}
+      weight: 100
+    - element: {fileID: 11400000, guid: 95c48ab0102834788a8672cb0fbb39dd, type: 2}
       weight: 100
   isEntered: 0
   isCought: 0
