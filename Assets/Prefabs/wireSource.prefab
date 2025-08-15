@@ -360,8 +360,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bottomRb: {fileID: 2536340519078660288}
-  requiredIPs:
-  - hi.lol
+  requiredIPs: []
   wireTip: {fileID: 3751679856271802628}
   corruptFile: {fileID: 11400000, guid: 5058f1cb10452ed42974f695b6db7fd3, type: 2}
   fileSpawnPrefab: {fileID: 5016628018956917613, guid: be6c285e665bd46e1b6763aabbea003e, type: 3}
