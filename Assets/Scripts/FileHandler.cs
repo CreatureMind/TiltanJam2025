@@ -12,6 +12,7 @@ public class FileHandler : MonoBehaviour
     public Rigidbody2D rb;
     public float pipeSpeed;
     public Transform bottomPoint;
+    public string IP;
     
     public WeightedList<ScriptableObject> files;
     
