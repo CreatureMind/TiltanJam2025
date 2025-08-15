@@ -13,9 +13,10 @@ MonoBehaviour:
   m_Name: cat_5.png
   m_EditorClassIdentifier: 
   fileName: cat_5.png
-  fileIcon: {fileID: -3776347469803542281, guid: 986e020df352c4447a868ee7b1099389, type: 3}
+  fileIcon: {fileID: 21300000, guid: af70965ab08444e26acd3a6e8ff5610b, type: 3}
   isImage: 1
-  picture: {fileID: -4054680225735955473, guid: 70e706c05b81948228233d2e910030c1, type: 3}
+  size: 1
+  picture: {fileID: 21300000, guid: 70e706c05b81948228233d2e910030c1, type: 3}
   isVirus: 0
   isFolder: 0
   files: []

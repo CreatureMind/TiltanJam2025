@@ -54,6 +54,8 @@ MonoBehaviour:
   fileName: {fileID: 3143945364411219739}
   rb: {fileID: 7929812642955401965}
   pipeSpeed: 3
+  bottomPoint: {fileID: 2103946946724599689}
+  IP: 
   files:
     values:
     - element: {fileID: 11400000, guid: d238cd624f1e049c5ad39650b519d3ca, type: 2}
@@ -62,16 +64,13 @@ MonoBehaviour:
       weight: 100
   isEntered: 0
   isCought: 0
+  coughtHand: {fileID: 0}
   popDuration: 0.25
   popOvershoot: 10
   minImpulse: 10
   maxImpulse: 15
   minTorque: 60
   maxTorque: 180
-  bottomPoint: {fileID: 2103946946724599689}
-  applyUprightTorque: 1
-  uprightStrength: 10
-  uprightDamping: 1.5
 --- !u!50 &7929812642955401965
 Rigidbody2D:
   serializedVersion: 5

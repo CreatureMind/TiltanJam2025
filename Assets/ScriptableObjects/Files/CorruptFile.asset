@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: CorruptFile
   m_EditorClassIdentifier: 
   fileName: NULL
-  fileIcon: {fileID: -5548791107479727098, guid: f527f1f932e554fa1b773c9a715f4d2b, type: 3}
+  fileIcon: {fileID: 21300000, guid: f527f1f932e554fa1b773c9a715f4d2b, type: 3}
   isImage: 0
-  size: 1
+  size: 0.5
   picture: {fileID: 0}
   isVirus: 1
   isFolder: 0
