@@ -1,53 +1,108 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerHand : MonoBehaviour
+public class PlayerHand : MonoBehaviour, IHitReciever
 {
     [SerializeField] private LineRenderer lr;
     [SerializeField] private Transform origin;
     [SerializeField] private Transform tip;
+    private Vector3? targetPos = null;
 
     [SerializeField, ReadOnly]
     private bool isDragging = false;
 
-    private FileHandler file;
+    private FileHandler file = null;
 
-    void OnMouseDrag()
+    void MouseUp()
     {
-        isDragging = true;
-    }
-
-    void OnMouseUp()
-    {
-        this.file = CheckForHit();
+        if (file != null && !targetPos.HasValue)
+        {
+            targetPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+            StartCoroutine(GoToTagetPos());
+        }
 
         if (file == null)
             isDragging = false;
-        else
-        {
-            
-        }
     }
 
-    FileHandler CheckForHit()
+    void MouseDown()
     {
-        if (!isDragging) return null;
+        if (targetPos.HasValue) return;
 
-        var hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        if (file == null)
+            isDragging = true;
+    }
 
-        if (hit == null || hit.collider == null || !hit.collider.TryGetComponent(out FileHandler file)) return null;
+    IEnumerator GoToTagetPos()
+    {
+        if (!targetPos.HasValue) yield break;
 
-        return file;
+        float totalTime = 1;
+        Vector3 startingPos = tip.transform.position;
+        Vector3 endPos = targetPos.Value;
+
+        for (float t = 0; t < totalTime; t += Time.deltaTime)
+        {
+            tip.transform.position = Vector3.Lerp(startingPos, endPos, t / totalTime);
+
+            yield return null;
+        }
+
+        tip.transform.position = endPos;
+
+        isDragging = false;
+        file.rb.bodyType = RigidbodyType2D.Dynamic;
+        file.rb.linearVelocity = Vector2.zero;
+        file = null;
+        targetPos = null;
+    }
+
+    void MouseClickDetect()
+    {
+        Func<PlayerHand> raycastLambda = () =>
+        {
+            List<RaycastHit2D> outList = new();
+            Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, new ContactFilter2D().NoFilter(), outList);
+
+            outList = outList.Where(e =>
+            {
+                if (e.transform.parent != null && e.transform.parent.TryGetComponent(out PlayerHand hand) && hand == this)
+                    return true;
+
+                return false;
+            }).ToList();
+
+            if (outList.Count == 0) return null;
+
+            return outList[0].transform.parent.GetComponent<PlayerHand>();
+        };
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            var res = raycastLambda();
+            if (res != null)
+                res.MouseDown();
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            if (file != null || isDragging)
+                MouseUp();
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!isDragging) GoToOrigin();
-        else FollowMouse();
+        MouseClickDetect();
+
+        if (!isDragging && this.file == null) GoToOrigin();
+        else if (this.file == null) FollowMouse();
 
         lr.positionCount = 2;
         lr.SetPositions(new Vector3[]{
@@ -62,6 +117,9 @@ public class PlayerHand : MonoBehaviour
         lr.textureScale = textScale;
 
         tip.rotation = Quaternion.LookRotation(Vector3.forward, directionVector);
+
+        if (file != null)
+            file.rb.position = (Vector2)tip.position;
     }
 
     void GoToOrigin()
@@ -74,5 +132,17 @@ public class PlayerHand : MonoBehaviour
         var newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         newPos.z = 0;
         tip.position = newPos;
+    }
+
+    public void hitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, GameObject other)
+    {
+        if (hitID == 0 && type == IHitReciever.HitType.Enter)
+        {
+            if (!isDragging || this.file != null || !other.TryGetComponent(out FileHandler file)) return;
+
+            this.file = file;
+            file.rb.bodyType = RigidbodyType2D.Kinematic;
+            //on picked
+        }
     }
 }
