@@ -15,7 +15,7 @@ public class FileHandler : MonoBehaviour
     public WeightedList<ScriptableObject> files;
     
     public Vector2 moveDirection { get; set; }
-    private bool isEntered = false;
+    public bool isEntered = false;
     private Vector2 lastPosition;
     
     [Header("Pop Tween")]

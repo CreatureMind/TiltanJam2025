@@ -7,6 +7,7 @@ public class FileScriptableObject : ScriptableObject
     public string fileName;
     public Sprite fileIcon;
     public bool isImage;
+    public float size = 1;
     [ShowIf("isImage")] 
     public Sprite picture;
     public bool isVirus;

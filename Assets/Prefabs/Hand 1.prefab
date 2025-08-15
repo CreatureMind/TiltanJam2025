@@ -155,7 +155,7 @@ GameObject:
   - component: {fileID: 1440148150576961962}
   - component: {fileID: 3211686897796613552}
   m_Layer: 0
-  m_Name: Hand
+  m_Name: Hand 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

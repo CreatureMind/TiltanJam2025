@@ -66,9 +66,9 @@ public class PlayerHand : MonoBehaviour, IHitReciever
 
     IEnumerator GoToTagetPos()
     {
-        if (!targetPos.HasValue) yield break;
+        if (!targetPos.HasValue || file == null) yield break;
 
-        float totalTime = 1;
+        float totalTime = 1 / file.file.size;
         Vector3 startingPos = tip.transform.position;
         Vector3 endPos = targetPos.Value;
 
@@ -84,6 +84,7 @@ public class PlayerHand : MonoBehaviour, IHitReciever
         isDragging = false;
         file.rb.bodyType = RigidbodyType2D.Dynamic;
         file.rb.linearVelocity = Vector2.zero;
+        file.rb.angularVelocity = 0;
         file = null;
         targetPos = null;
     }
@@ -179,11 +180,12 @@ public class PlayerHand : MonoBehaviour, IHitReciever
     {
         if (hitID == 0 && type == IHitReciever.HitType.Enter)
         {
-            if (!isDragging || this.file != null || !other.TryGetComponent(out FileHandler file)) return;
+            if (!isDragging || this.file != null || !other.TryGetComponent(out FileHandler file) || !file.isEntered) return;
 
             this.file = file;
             file.rb.bodyType = RigidbodyType2D.Kinematic;
             file.rb.linearVelocity = Vector2.zero;
+            file.rb.angularVelocity = 0;
             //on picked
         }
     }
