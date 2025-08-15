@@ -60,6 +60,10 @@ public class FileHandler : MonoBehaviour
         fileIcon.sprite = file.fileIcon;
         rb.bodyType = RigidbodyType2D.Kinematic;
         transform.localScale = Vector3.one * pipeSize;
+
+        Func<byte> randomIP = () => (byte)Random.Range(0, 256);
+
+        IP = $"{randomIP()}.{randomIP()}.{randomIP()}.{randomIP()}";
     }
 
     public void SetupForRandomFile()

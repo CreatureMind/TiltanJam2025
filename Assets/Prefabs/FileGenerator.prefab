@@ -257,7 +257,7 @@ MonoBehaviour:
   spawnPoint: {fileID: 5426036193563542754}
   maxFilesToGenerate: 10
   filesGenerated: 0
-  timeToGenerate: 2
+  timeToGenerate: 10
 --- !u!61 &2744944903368753063
 BoxCollider2D:
   m_ObjectHideFlags: 0

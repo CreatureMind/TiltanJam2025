@@ -20,8 +20,8 @@ public class TaskManager : MonoBehaviour
     public static TaskManager Get() => instance;
 
     [SerializeField] private List<FileHandler> allFiles = new();
-    [SerializeField] private float maxMemoryCapacity;
-    [SerializeField, ReadOnly] private float memoryCapacity;
+    public float maxMemoryCapacity;
+    [ReadOnly] public float memoryCapacity;
 
     [SerializeField] private TextMeshProUGUI bgText;
 
@@ -34,6 +34,7 @@ public class TaskManager : MonoBehaviour
     private bool isDead;
 
     public event UnityAction OnGameOver;
+    public event UnityAction OnMemoryChanged;
 
     public int WireCompleteCount { get; private set; }
 
@@ -63,6 +64,8 @@ public class TaskManager : MonoBehaviour
     {
         memoryCapacity = allFiles.Sum(e => e.file.size);
 
+        OnMemoryChanged?.Invoke();
+
         if (maxMemoryCapacity <= memoryCapacity && !isDead)
         {
             isDead = true;
@@ -73,8 +76,6 @@ public class TaskManager : MonoBehaviour
 
     void OnFilePooled(FileHandler file)
     {
-        if (file.file.isVirus) return;
-
         var wire = Instantiate(wirePrefab).GetComponent<InternetWire>();
         wire.SetupWithSettings(possibleWires.ChooseRandom());
         wire.requiredIPs.Add(file.IP);

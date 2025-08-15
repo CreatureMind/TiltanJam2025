@@ -14,6 +14,7 @@ public class TooltipHandler : MonoBehaviour
     {
         canvas.worldCamera = Camera.main;
         gameObject.SetActive(false);
+        animator.speed = 2;
     }
 
     public void ShowTooltip()
