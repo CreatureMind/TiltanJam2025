@@ -7,10 +7,11 @@ using UnityEngine.Events;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
-public class FileHandler : MonoBehaviour
+public class FileHandler : MonoBehaviour, ITipable
 {
     public FileScriptableObject file;
     public SpriteRenderer fileIcon;
+    public SpriteRenderer fileOutline;
     public TMP_Text fileName;
     public Rigidbody2D rb;
     public float pipeSpeed;
@@ -58,6 +59,7 @@ public class FileHandler : MonoBehaviour
         fileName.text = file.fileName;
         fileName.gameObject.SetActive(false);
         fileIcon.sprite = file.fileIcon;
+        fileOutline.sprite = file.fileIcon;
         rb.bodyType = RigidbodyType2D.Kinematic;
         transform.localScale = Vector3.one * pipeSize;
 
@@ -143,5 +145,15 @@ public class FileHandler : MonoBehaviour
     private void OnDestroy()
     {
         OnConsumed?.Invoke(this);
+    }
+
+    public string GetIp()
+    {
+        return IP;
+    }
+
+    public string GetSize()
+    {
+        return file.size.ToString();
     }
 }

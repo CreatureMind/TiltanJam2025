@@ -255,9 +255,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   filePrefab: {fileID: 5016628018956917613, guid: be6c285e665bd46e1b6763aabbea003e, type: 3}
   spawnPoint: {fileID: 5426036193563542754}
+  colors:
+  - {r: 0.61960787, g: 0.003921569, b: 0.25882354, a: 1}
+  - {r: 0.8352941, g: 0.24313726, b: 0.30980393, a: 1}
+  - {r: 0.95686275, g: 0.42745098, b: 0.2627451, a: 1}
+  - {r: 0.99607843, g: 0.8784314, b: 0.54509807, a: 1}
+  - {r: 0.9019608, g: 0.9607843, b: 0.59607846, a: 1}
+  - {r: 0.67058825, g: 0.8666667, b: 0.6431373, a: 1}
+  - {r: 0.4, g: 0.7607843, b: 0.64705884, a: 1}
+  - {r: 0.19607843, g: 0.53333336, b: 0.7411765, a: 1}
+  - {r: 0.36862746, g: 0.30980393, b: 0.63529414, a: 1}
   maxFilesToGenerate: 10
   filesGenerated: 0
   timeToGenerate: 10
+  minInterval: 3
+  halfLifeWires: 20
+  poolPressure: 0.25
 --- !u!61 &2744944903368753063
 BoxCollider2D:
   m_ObjectHideFlags: 0

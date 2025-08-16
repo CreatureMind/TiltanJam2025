@@ -1,7 +1,9 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.Utilities;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
@@ -64,6 +66,7 @@ public class TaskManager : MonoBehaviour
     {
         memoryCapacity = allFiles.Sum(e => e.file.size);
 
+        if (isDead) return;
         OnMemoryChanged?.Invoke();
 
         if (maxMemoryCapacity <= memoryCapacity && !isDead)
@@ -80,6 +83,7 @@ public class TaskManager : MonoBehaviour
         wire.SetupWithSettings(possibleWires.ChooseRandom());
         wire.requiredIPs.Add(file.IP);
         wire.transform.position = new Vector3(Random.Range(-7.5f, 7.5f), 8.85f, 0);
+        wire.Outlines.ForEach(outline => outline.color = file.fileOutline.color);
         wire.OnWireComplete += OnWireComplete;
     }
 

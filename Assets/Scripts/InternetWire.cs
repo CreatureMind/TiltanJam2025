@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class InternetWire : MonoBehaviour, IHitReciever
+public class InternetWire : MonoBehaviour, IHitReciever, ITipable
 {
     [SerializeField] private InternetWireScriptableObject settings;
     [SerializeField] private Rigidbody2D bottomRb;
@@ -13,6 +13,8 @@ public class InternetWire : MonoBehaviour, IHitReciever
     [SerializeField] private Transform wireTip;
     [SerializeField] private FileScriptableObject corruptFile;
     [SerializeField] private FileHandler fileSpawnPrefab;
+    public TooltipHandler tooltip;
+    public SpriteRenderer[] Outlines;
 
     [SerializeField] private List<SpriteRenderer> visuals;
     [SerializeField] private SpriteRenderer tipVisual;
@@ -188,5 +190,26 @@ public class InternetWire : MonoBehaviour, IHitReciever
     void Wiggle()
     {
         bottomRb.AddForce(new Vector2(Random.Range(2, 7.5f) * (Random.value > .5f ? -1 : 1), 0), ForceMode2D.Impulse);
+    }
+    
+    private void OnMouseEnter()
+    {
+        tooltip.ShowTooltip();
+    }
+
+    private void OnMouseExit()
+    {
+        tooltip.HideTooltip();
+    }
+
+    public string GetIp()
+    {
+        if (requiredIPs.Count == 0) return null;
+        return requiredIPs[0];
+    }
+
+    public string GetSize()
+    {
+        return null;
     }
 }
