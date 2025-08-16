@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8992563048785452626}
   - component: {fileID: 1683973926754706565}
-  - component: {fileID: 8201840769932517}
   - component: {fileID: 3086081193720227957}
   m_Layer: 0
   m_Name: Tip
@@ -71,24 +70,6 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0.1}
   m_Radius: 0.5
---- !u!114 &8201840769932517
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3176438609614218785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fa168d88e5b1644c9cb322430ca9346, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  hitReciever: {fileID: 3523160620746261466}
-  hitID: 0
-  getEnter: 1
-  getStay: 0
-  getExit: 0
-  isTrigger: 1
 --- !u!50 &3086081193720227957
 Rigidbody2D:
   serializedVersion: 5
@@ -166,7 +147,9 @@ MonoBehaviour:
   origin: {fileID: 0}
   tip: {fileID: 8992563048785452626}
   handTipSpr: {fileID: 2993082439411376183}
-  isDragging: 0
+  zOrderSelectedAddition: 0
+  tipHoldSpr: {fileID: 0}
+  originOffset: {x: 0, y: 0}
 --- !u!120 &3211686897796613552
 LineRenderer:
   serializedVersion: 2
@@ -211,7 +194,7 @@ LineRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -6
   m_Positions:
   - {x: 0, y: 0, z: 0}
   - {x: 0, y: 0, z: 1}
@@ -235,8 +218,8 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
+      key1: {r: 0.83137256, g: 0.83137256, b: 0.83137256, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -260,7 +243,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 90

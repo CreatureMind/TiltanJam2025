@@ -36,7 +36,7 @@ public class hitSender : MonoBehaviour
         hitRecieverInterface = hitReciever.GetComponent<IHitReciever>();
 
         if (hitRecieverInterface == null)
-            Debug.LogError("Referenced hitReciever does not inherate 'IHitReciever' " + gameObject.name);
+            throw new System.Exception($"Referenced hitReciever does not inherate 'IHitReciever' {gameObject.name}");
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using DG.Tweening;
 using Sirenix.OdinInspector;
-using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -229,8 +228,10 @@ public class PlayerHand : MonoBehaviour
     public void OnSelected()
     {
         Debug.Log("meow :D");
-        transform.DOScale(1f, .5f)
-             .SetEase(Ease.InOutBack, 3f);
+        transform.DOKill();
+        transform.localScale = Vector3.one;
+        transform.DOPunchScale(Vector3.one * 0.25f, .5f);
+             //.SetEase(Ease.InOutBack, 3f);
     } 
 
     public void OnDeselected()
