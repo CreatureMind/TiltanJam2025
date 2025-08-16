@@ -1236,7 +1236,7 @@ MonoBehaviour:
   allFiles: []
   maxMemoryCapacity: 15
   memoryCapacity: 0
-  bgText: {fileID: 0}
+  bgText: {fileID: 617965102}
   wirePrefab: {fileID: 2837778957192763316, guid: 7dc106b35534ab449acc343f1da3a359, type: 3}
   possibleWires:
     values:

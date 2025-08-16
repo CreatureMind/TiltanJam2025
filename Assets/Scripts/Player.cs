@@ -19,7 +19,11 @@ public class Player : MonoBehaviour
 
     void HandClicked(PlayerHand hand)
     {
+        if (selectedHand != null)
+            selectedHand?.OnDeselected();
         selectedHand = hand;
+        if (selectedHand != null)
+            selectedHand.OnSelected();
     }
 
     private void Update()

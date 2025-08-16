@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using UnityEngine;
@@ -224,4 +225,16 @@ public class PlayerHand : MonoBehaviour
 
         RunGoTowards(transform, .5f, null);
     }
+
+    public void OnSelected()
+    {
+        Debug.Log("meow :D");
+        transform.DOScale(1f, .5f)
+             .SetEase(Ease.InOutBack, 3f);
+    } 
+
+    public void OnDeselected()
+    {
+
+    } 
 }
