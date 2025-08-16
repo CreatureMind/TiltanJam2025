@@ -1,7 +1,9 @@
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -17,6 +19,14 @@ public class Player : MonoBehaviour
         {
             item.OnClicked += HandClicked;
         }
+
+        var seq = DOTween.Sequence();
+        seq.SetLoops(-1);
+
+        seq.Append(transform.DOMoveY(.5f + transform.position.y, 1f).SetEase(Ease.InOutQuad, 2));
+        seq.Append(transform.DOMoveY(transform.position.y, 1f).SetEase(Ease.InOutQuad, 2));
+
+        seq.Play();
     }
 
     void HandClicked(PlayerHand hand)

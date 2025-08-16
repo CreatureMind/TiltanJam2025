@@ -100,8 +100,6 @@ public class InternetWire : MonoBehaviour, IHitReciever, ITipable
             }
             else
             {
-                WireLeave();
-
                 TaskManager.Get().WriteToConsole($"end user req pong result: -1");
             }
         }
