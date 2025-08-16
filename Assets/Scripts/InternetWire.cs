@@ -109,6 +109,8 @@ public class InternetWire : MonoBehaviour, IHitReciever, ITipable
 
     void OnValidIPFound(FileHandler file)
     {
+        if (file.beingSucked) return;
+
         if (file.coughtHand != null)
             file.coughtHand.ForceUngrip();
 
@@ -118,7 +120,8 @@ public class InternetWire : MonoBehaviour, IHitReciever, ITipable
         file.transform.DOMove(wireTip.position, .5f)
             .SetEase(Ease.InOutExpo, 2);
 
-        file.GetComponent<Collider2D>().enabled = false;
+        file.GetComponent<CircleCollider2D>().enabled = false;
+        file.beingSucked = true;
 
         Wiggle();
 

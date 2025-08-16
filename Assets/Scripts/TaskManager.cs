@@ -1,4 +1,5 @@
 using Sirenix.OdinInspector;
+using Sirenix.Serialization;
 using System.Collections.Generic;
 using System.Linq;
 using Sirenix.Utilities;
@@ -6,6 +7,8 @@ using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 
 public class TaskManager : MonoBehaviour
@@ -30,6 +33,8 @@ public class TaskManager : MonoBehaviour
     [SerializeField] GameObject wirePrefab;
     [SerializeField] private WeightedList<InternetWireScriptableObject> possibleWires;
     [SerializeField] private FileGenerator generator;
+
+    [SerializeField] private Volume volume;
 
     [SerializeField] private GameObject gameOverCanvas;
 
@@ -69,6 +74,12 @@ public class TaskManager : MonoBehaviour
         if (isDead) return;
         OnMemoryChanged?.Invoke();
 
+        if (volume.profile.TryGet(out Vignette vignette)){
+            vignette.color.Override(Color.Lerp(Color.black, Color.red, memoryCapacity / maxMemoryCapacity));
+
+            vignette.intensity.Override(Mathf.Lerp(.25f, .4f, memoryCapacity / maxMemoryCapacity));
+        }
+
         if (maxMemoryCapacity <= memoryCapacity && !isDead)
         {
             isDead = true;
@@ -100,6 +111,6 @@ public class TaskManager : MonoBehaviour
     public void ResetGame()
     {
         instance = null;
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("Presentation");
     }
 }

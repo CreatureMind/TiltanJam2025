@@ -7,7 +7,7 @@ using Sirenix.Utilities;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class PlayerHand : MonoBehaviour, IHitReciever
+public class PlayerHand : MonoBehaviour
 {
     [BoxGroup("References")]
     [SerializeField] private LineRenderer lr;
@@ -25,18 +25,21 @@ public class PlayerHand : MonoBehaviour, IHitReciever
     [BoxGroup("Options")]
     [SerializeField] private Vector2 originOffset;
 
+    private FileHandler pickedItem;
+    private int handState = 0;
+
     private Sprite tipNormalSpr;
 
-    private Vector3? targetPos = null;
     private int originalLRSortingOrder;
     private int originalTipSortingOrder;
 
-    [SerializeField, ReadOnly]
-    private bool isDragging = false;
-
-    private FileHandler file = null;
-
     private bool canDrag = true;
+
+    public event UnityAction<PlayerHand> OnClicked;
+
+    Coroutine currentGoTowards = null;
+
+    public bool HasItem => pickedItem != null && handState >= 2;
 
     private void Start()
     {
@@ -46,47 +49,95 @@ public class PlayerHand : MonoBehaviour, IHitReciever
         TaskManager.Get().OnGameOver += () => canDrag = false;
     }
 
-    void MouseUp()
-    {
-        if (file != null && !targetPos.HasValue)
-        {
-            var newTarget = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            newTarget.z = 0;
-            newTarget = newTarget.Clamp(new Vector3(-9, -5, 0), new Vector3(9, 5, 0));
-            targetPos = newTarget;
-            StartCoroutine(GoToTagetPos());
-        }
-
-        if (file == null)
-            isDragging = false;
-    }
-
     void MouseDown()
     {
-        if (targetPos.HasValue) return;
-
-        if (file == null)
-            isDragging = true;
+        OnClicked?.Invoke(this);
     }
 
-    IEnumerator GoToTagetPos()
+    public void PickupItem(FileHandler item)
     {
-        if (!targetPos.HasValue || file == null) yield break;
+        if (pickedItem) return;
 
-        float totalTime = file.file.size;
+        pickedItem = item;
+
+        handState = 1;
+
+        RunGoTowards(pickedItem.transform, .5f, OnItemReached);
+    }
+
+    public void TransportItem(Vector3 position)
+    {
+        if (!pickedItem || handState == 3) return;
+
+        handState = 3;
+
+        RunGoTowards(position, .5f, OnItemTransported);
+    }
+
+    public void RunGoTowards(Vector3 target, float time, Action endCallback)
+    {
+        if (currentGoTowards != null) StopCoroutine(currentGoTowards);
+
+        currentGoTowards = StartCoroutine(GoTowards(target, time, endCallback));
+    }
+
+    public void RunGoTowards(Transform target, float time, Action endCallback)
+    {
+        if (currentGoTowards != null) StopCoroutine(currentGoTowards);
+
+        currentGoTowards = StartCoroutine(GoTowards(target, time, endCallback));
+    }
+
+    IEnumerator GoTowards(Vector3 target, float time, Action endCallback)
+    {
         Vector3 startingPos = tip.transform.position;
-        Vector3 endPos = targetPos.Value;
+        Vector3 endPos = target;
 
-        for (float t = 0; t < totalTime; t += Time.deltaTime)
+        for (float t = 0; t < time; t += Time.deltaTime)
         {
-            tip.transform.position = Vector3.Lerp(startingPos, endPos, t / totalTime);
+            tip.transform.position = Vector3.Lerp(startingPos, endPos, t / time);
 
             yield return null;
         }
 
         tip.transform.position = endPos;
 
-        ForceUngrip();
+        currentGoTowards = null;
+
+        endCallback?.Invoke();
+    }
+
+    IEnumerator GoTowards(Transform target, float time, Action endCallback)
+    {
+        Vector3 startingPos = tip.transform.position;
+
+        for (float t = 0; t < time; t += Time.deltaTime)
+        {
+            tip.transform.position = Vector3.Lerp(startingPos, target.position, t / time);
+
+            yield return null;
+        }
+
+        tip.transform.position = target.position;
+
+        currentGoTowards = null;
+
+        endCallback?.Invoke();
+    }
+
+    void OnItemReached()
+    {
+        handState = 2;
+     
+        RunGoTowards(transform, pickedItem.file.size, null);
+    }
+
+    void OnItemTransported()
+    {
+        handState = 0;
+        pickedItem = null;
+
+        RunGoTowards(transform, .5f, null);
     }
 
     void MouseClickDetect()
@@ -115,29 +166,16 @@ public class PlayerHand : MonoBehaviour, IHitReciever
             if (res != null)
                 res.MouseDown();
         }
-        if (Input.GetMouseButtonUp(0))
-        {
-            if (file != null || isDragging)
-                MouseUp();
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!canDrag)
-        {
-            GoToOrigin();
-        }
-        else
-        {
-            if (!isDragging && this.file == null) GoToOrigin();
-            else if (this.file == null) FollowMouse();
-        }
+        if (PauseMenu.IsPaused) return;
 
         MouseClickDetect();
 
-        if (this.file != null || isDragging)
+        if (handState >= 2)
         {
             lr.sortingOrder = originalLRSortingOrder + zOrderSelectedAddition;
             handTipSpr.sortingOrder = originalTipSortingOrder + zOrderSelectedAddition;
@@ -148,7 +186,7 @@ public class PlayerHand : MonoBehaviour, IHitReciever
             handTipSpr.sortingOrder = originalTipSortingOrder;
         }
 
-        if (tipHoldSpr != null && file != null)
+        if (tipHoldSpr != null && pickedItem != null && handState != 1)
             handTipSpr.sprite = tipHoldSpr;
         else
             handTipSpr.sprite = tipNormalSpr;
@@ -169,47 +207,21 @@ public class PlayerHand : MonoBehaviour, IHitReciever
 
         tip.rotation = Quaternion.LookRotation(Vector3.forward, directionVector);
 
-        if (file != null)
-            file.rb.position = (Vector2)tip.position;
-    }
-
-    void GoToOrigin()
-    {
-        tip.position = Vector3.Lerp(tip.position, transform.position, Time.deltaTime * 5);
-    }
-
-    void FollowMouse()
-    {
-        var newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        newPos.z = 0;
-        tip.position = newPos;
-    }
-
-    public void hitRecieved(int hitID, IHitReciever.HitType type, bool isTriggerHit, GameObject other)
-    {
-        if (hitID == 0 && type == IHitReciever.HitType.Enter)
+        if (handState >= 2 && pickedItem != null)
         {
-            if (!isDragging || this.file != null || !other.TryGetComponent(out FileHandler file) || !file.isEntered || file.isCought) return;
-
-            this.file = file;
-            file.rb.bodyType = RigidbodyType2D.Kinematic;
-            file.rb.linearVelocity = Vector2.zero;
-            file.rb.angularVelocity = 0;
-            file.OnCought(this);
-            //on picked
+            pickedItem.rb.position = tip.transform.position;
+            pickedItem.rb.linearVelocity = Vector2.zero;
+            pickedItem.rb.angularVelocity = 0;
         }
     }
 
     public void ForceUngrip()
     {
-        if (file == null) return;
+        if (pickedItem == null) return;
 
-        isDragging = false;
-        file.rb.bodyType = RigidbodyType2D.Dynamic;
-        file.rb.linearVelocity = Vector2.zero;
-        file.rb.angularVelocity = 0;
-        file.OnReleased();
-        file = null;
-        targetPos = null;
+        handState = 0;
+        pickedItem = null;
+
+        RunGoTowards(transform, .5f, null);
     }
 }

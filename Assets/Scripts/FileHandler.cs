@@ -40,6 +40,8 @@ public class FileHandler : MonoBehaviour, ITipable
     public float minTorque = 60f;
     public float maxTorque = 180f;
 
+    public bool beingSucked;
+
     public event UnityAction<FileHandler> OnConsumed;
     
 
