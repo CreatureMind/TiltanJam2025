@@ -15,4 +15,4 @@ MonoBehaviour:
   color: {r: 1, g: 1, b: 1, a: 1}
   zOrder: 10
   spawnDelayTime: {x: 0, y: 4}
-  stayTime: {x: 20, y: 40}
+  stayTime: {x: 30, y: 60}

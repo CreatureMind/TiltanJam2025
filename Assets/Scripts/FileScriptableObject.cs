@@ -6,6 +6,7 @@ public class FileScriptableObject : ScriptableObject
 {
     public string fileName;
     public Sprite fileIcon;
+    public Sprite fileOutline;
     public float size = 1;
     public bool isImage;
     [ShowIf("isImage")] 

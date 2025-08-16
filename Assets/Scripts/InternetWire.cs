@@ -197,11 +197,13 @@ public class InternetWire : MonoBehaviour, IHitReciever, ITipable
     
     private void OnMouseEnter()
     {
+        Debug.Log("hover");
         tooltip.ShowTooltip();
     }
 
     private void OnMouseExit()
     {
+        Debug.Log("leave");
         tooltip.HideTooltip();
     }
 

@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: tax_return_2023_final.pdf
   fileIcon: {fileID: 21300000, guid: fb9875ccf6b3a432a89960f395e180f2, type: 3}
-  size: 1
+  fileOutline: {fileID: 21300000, guid: 6535b60f7b14d495f88a4f3e97bb80f1, type: 3}
+  size: 6
   isImage: 1
   picture: {fileID: 0}
   isSound: 0

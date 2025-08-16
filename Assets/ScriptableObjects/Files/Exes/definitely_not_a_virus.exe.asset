@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: definitely_not_a_virus.exe
   fileIcon: {fileID: 21300000, guid: 70eedf79665f34b5faa0df408309950e, type: 3}
-  size: 3
+  fileOutline: {fileID: 21300000, guid: 426c2924b25d242a398bf8c3bc4bbc53, type: 3}
+  size: 10
   isImage: 0
   picture: {fileID: 0}
   isSound: 0
