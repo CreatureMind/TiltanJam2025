@@ -75,9 +75,11 @@ public class TaskManager : MonoBehaviour
         OnMemoryChanged?.Invoke();
 
         if (volume.profile.TryGet(out Vignette vignette)){
-            vignette.color.Override(Color.Lerp(Color.black, Color.red, memoryCapacity / maxMemoryCapacity));
+            float expoVal = NormalizedExp(memoryCapacity / maxMemoryCapacity, 8);
 
-            vignette.intensity.Override(Mathf.Lerp(.25f, .4f, memoryCapacity / maxMemoryCapacity));
+            vignette.color.Override(Color.Lerp(Color.black, Color.red, expoVal));
+
+            vignette.intensity.Override(Mathf.Lerp(.25f, .4f, expoVal));
         }
 
         if (maxMemoryCapacity <= memoryCapacity && !isDead)
@@ -113,4 +115,7 @@ public class TaskManager : MonoBehaviour
         instance = null;
         SceneManager.LoadScene("Presentation");
     }
+
+    float ExpFunction(float x, float k) => Mathf.Exp(k * (x - 1f));
+    float NormalizedExp(float x, float k) => (Mathf.Exp(k * (x - 1f)) - Mathf.Exp(-k)) / (1f - Mathf.Exp(-k));
 }
