@@ -52,7 +52,7 @@ public class Player : MonoBehaviour
                 Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, new ContactFilter2D().NoFilter(), files);
                 var filesList = files.Where(e => e.transform.TryGetComponent(out FileHandler _)).Select(e => e.transform.GetComponent<FileHandler>()).ToList();
 
-                if (filesList.Count != 0)
+                if (filesList.Count != 0 && filesList[0].isEntered)
                     selectedHand.PickupItem(filesList[0]);
             }
         }
