@@ -9,6 +9,8 @@ public class Player : MonoBehaviour
     [SerializeField] private PlayerHand[] hands;
     [SerializeField, ReadOnly] private PlayerHand selectedHand;
 
+    private bool selectedThisFrame = false;
+
     private void Start()
     {
         foreach (var item in hands)
@@ -19,6 +21,9 @@ public class Player : MonoBehaviour
 
     void HandClicked(PlayerHand hand)
     {
+        if (selectedHand != hand)
+            selectedThisFrame = true;
+
         if (selectedHand != null)
             selectedHand?.OnDeselected();
         selectedHand = hand;
@@ -26,8 +31,14 @@ public class Player : MonoBehaviour
             selectedHand.OnSelected();
     }
 
-    private void Update()
+    private void LateUpdate()
     {
+        if (selectedThisFrame)
+        {
+            selectedThisFrame = false;
+            return;
+        }
+
         if (Input.GetMouseButtonDown(0) && selectedHand != null)
         {
             if (selectedHand.HasItem)

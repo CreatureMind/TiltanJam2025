@@ -33,8 +33,6 @@ public class PlayerHand : MonoBehaviour
     private int originalLRSortingOrder;
     private int originalTipSortingOrder;
 
-    private bool canDrag = true;
-
     public event UnityAction<PlayerHand> OnClicked;
 
     Coroutine currentGoTowards = null;
@@ -46,7 +44,6 @@ public class PlayerHand : MonoBehaviour
         originalLRSortingOrder = lr.sortingOrder;
         originalTipSortingOrder = handTipSpr.sortingOrder;
         tipNormalSpr = handTipSpr.sprite;
-        TaskManager.Get().OnGameOver += () => canDrag = false;
     }
 
     void MouseDown()
@@ -128,6 +125,9 @@ public class PlayerHand : MonoBehaviour
     void OnItemReached()
     {
         handState = 2;
+
+        pickedItem.isCought = true;
+        pickedItem.coughtHand = this;
      
         RunGoTowards(transform, pickedItem.file.size, null);
     }
@@ -220,6 +220,8 @@ public class PlayerHand : MonoBehaviour
         if (pickedItem == null) return;
 
         handState = 0;
+        pickedItem.isCought = false;
+        pickedItem.coughtHand = null;
         pickedItem = null;
 
         RunGoTowards(transform, .5f, null);
@@ -227,7 +229,6 @@ public class PlayerHand : MonoBehaviour
 
     public void OnSelected()
     {
-        Debug.Log("meow :D");
         transform.DOKill();
         transform.localScale = Vector3.one;
         transform.DOPunchScale(Vector3.one * 0.25f, .5f);

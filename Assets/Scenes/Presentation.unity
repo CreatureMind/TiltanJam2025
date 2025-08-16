@@ -765,6 +765,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hand (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 3523160620746261466, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6644349314354199518, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
       propertyPath: m_LocalPosition.x
       value: -1.23
@@ -1363,6 +1367,38 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a61eaa79a11f44b1ab164865c009c619, type: 3}
+    - target: {fileID: 2993082439411376183, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3523160620746261466, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
       propertyPath: m_Name
       value: Hand (2)
@@ -1561,6 +1597,38 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a61eaa79a11f44b1ab164865c009c619, type: 3}
+    - target: {fileID: 2993082439411376183, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3523160620746261466, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
       propertyPath: m_Name
       value: Hand (1)
@@ -3235,6 +3303,38 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: a61eaa79a11f44b1ab164865c009c619, type: 3}
+    - target: {fileID: 2993082439411376183, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_SortingOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_SortingOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3211686897796613552, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3523160620746261466, guid: dcd108d167f7a7440b1c6d8df0a37564, type: 3}
       propertyPath: m_Name
       value: Hand
