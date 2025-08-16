@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: holiday_photos_omg.jpg
   fileIcon: {fileID: 21300000, guid: 1b263572d4c374723ac084d401c6063c, type: 3}
+  fileOutline: {fileID: 21300000, guid: a81ca069d89a74a50a2bb57230734249, type: 3}
+  size: 6
   isImage: 1
-  size: 1
   picture: {fileID: 21300000, guid: f527f1f932e554fa1b773c9a715f4d2b, type: 3}
+  isSound: 0
+  sound: {fileID: 0}
   isVirus: 0
   isFolder: 0
   files: []

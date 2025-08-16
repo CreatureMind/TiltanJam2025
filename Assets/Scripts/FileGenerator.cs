@@ -5,11 +5,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Events;
 
+[Serializable]
+public class AdressColor
+{
+    public string ip;
+    public Color color = Color.white;
+}
 public class FileGenerator : MonoBehaviour
 {
     public FileHandler filePrefab;
     public Transform spawnPoint;
-    public Color[] colors;
+    public AdressColor[] colors;
 
     public List<FileHandler> FilesToGenerate { get; private set; } = new();
     public int maxFilesToGenerate = 10;
@@ -56,7 +62,7 @@ public class FileGenerator : MonoBehaviour
         file.gameObject.SetActive(false);
         FilesToGenerate.Add(file);
         file.SetupForRandomFile();
-        file.fileOutline.color = colors[UnityEngine.Random.Range(0, colors.Length)];
+        file.SetColorAdress(colors[UnityEngine.Random.Range(0, colors.Length)]);
 
         OnNewFilePooled?.Invoke(file);
 

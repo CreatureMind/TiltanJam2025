@@ -23,13 +23,18 @@ public class TooltipHandler : MonoBehaviour
 
     public void ShowTooltip()
     {
-        if(tipable == null || tipable.GetIp() == null || tipable.GetSize() == null)
+        if(tipable == null)
             return;
 
-        ipText.text = tipable.GetIp();
+        if (tipable.GetIp() == null)
+            ipText.gameObject.SetActive(false);
+        else
+            ipText.text = tipable.GetIp();
         if (tipable.GetSize() == null)
             sizeText.gameObject.SetActive(false);
-        sizeText.text = $"File size: {tipable.GetSize()} mb";
+        else
+            sizeText.text = $"File size: {tipable.GetSize()} mb";
+        
         gameObject.SetActive(true);
         animator.SetBool("Show", true);
         animator.SetBool("Hide", false);

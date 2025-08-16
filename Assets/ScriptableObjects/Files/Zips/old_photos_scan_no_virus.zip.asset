@@ -10,15 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b5222d3b449164989a67af2ecad4bef1, type: 3}
-  m_Name: cat_7.png
+  m_Name: old_photos_scan_no_virus.zip
   m_EditorClassIdentifier: 
-  fileName: cat_7.png
-  fileIcon: {fileID: 21300000, guid: af70965ab08444e26acd3a6e8ff5610b, type: 3}
-  isImage: 1
-  size: 1
-  picture: {fileID: 21300000, guid: a759ad6df91cf47328bbd624634b407a, type: 3}
-  isVirus: 0
+  fileName: old_photos_scan_no_virus.zip
+  fileIcon: {fileID: 21300000, guid: 95191f02dfe96426aa85620719bb6cc9, type: 3}
+  fileOutline: {fileID: 21300000, guid: 3792e31f39c2547219475653946e53d7, type: 3}
+  size: 6
+  isImage: 0
+  picture: {fileID: 0}
+  isSound: 0
+  sound: {fileID: 0}
+  isVirus: 1
   isFolder: 0
   files: []
   isLocked: 0
-  password: 
+  password: 1234

@@ -14,11 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: cat_pictures_final_final_really_final.zip
   fileIcon: {fileID: 21300000, guid: cbbbcd648e3414b42bfb36bf165c1e94, type: 3}
+  fileOutline: {fileID: 21300000, guid: 549eef081b9bb4cac895c0e6a231844c, type: 3}
+  size: 8
   isImage: 0
-  size: 2
   picture: {fileID: 0}
+  isSound: 0
+  sound: {fileID: 0}
   isVirus: 0
-  isFolder: 1
+  isFolder: 0
   files:
   - {fileID: 11400000, guid: a15c0c629b67f44b4b1509e5e3629994, type: 2}
   - {fileID: 11400000, guid: c8361981417a245f0a9a982e2cbb6e4b, type: 2}

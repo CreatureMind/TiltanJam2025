@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: strange_noise_recording.mp3
   fileIcon: {fileID: 21300000, guid: 4b99e41b6c2f64092b4238d065c54ca8, type: 3}
-  size: 1
+  fileOutline: {fileID: 21300000, guid: d1720f3c9521640e2abbedc016475765, type: 3}
+  size: 3
   isImage: 0
   picture: {fileID: 0}
   isSound: 1

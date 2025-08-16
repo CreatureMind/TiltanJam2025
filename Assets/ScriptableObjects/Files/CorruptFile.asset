@@ -14,9 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fileName: NULL
   fileIcon: {fileID: 21300000, guid: f527f1f932e554fa1b773c9a715f4d2b, type: 3}
+  fileOutline: {fileID: 21300000, guid: f527f1f932e554fa1b773c9a715f4d2b, type: 3}
+  size: 10
   isImage: 0
-  size: 0.5
   picture: {fileID: 0}
+  isSound: 0
+  sound: {fileID: 0}
   isVirus: 1
   isFolder: 0
   files: []

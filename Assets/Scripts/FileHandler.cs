@@ -61,13 +61,9 @@ public class FileHandler : MonoBehaviour, ITipable
         fileName.text = file.fileName;
         fileName.gameObject.SetActive(false);
         fileIcon.sprite = file.fileIcon;
-        fileOutline.sprite = file.fileIcon;
+        fileOutline.sprite = file.fileOutline;
         rb.bodyType = RigidbodyType2D.Kinematic;
         transform.localScale = Vector3.one * pipeSize;
-
-        Func<byte> randomIP = () => (byte)Random.Range(0, 256);
-
-        IP = $"{randomIP()}.{randomIP()}.{randomIP()}.{randomIP()}";
     }
 
     public void SetupForRandomFile()
@@ -157,5 +153,11 @@ public class FileHandler : MonoBehaviour, ITipable
     public string GetSize()
     {
         return file.size.ToString();
+    }
+
+    public void SetColorAdress(AdressColor aColor)
+    {
+        fileOutline.color = aColor.color;
+        IP = aColor.ip;
     }
 }
