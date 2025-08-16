@@ -68,7 +68,7 @@ public class PlayerHand : MonoBehaviour
 
         handState = 3;
 
-        RunGoTowards(position, .5f, OnItemTransported);
+        RunGoTowards(position, pickedItem.file.size, OnItemTransported);
     }
 
     public void RunGoTowards(Vector3 target, float time, Action endCallback)
